@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factories\CommandFactory.cs" />
     <Compile Include="Factories\EntityFactory.cs" />
     <Compile Include="Operation\ConsoleOperation.cs" />
     <Compile Include="Operation\FilmOperation.cs" />
@@ -52,6 +51,10 @@
     <ProjectReference Include="..\MDB.Infrastructure\MDB.Infrastructure.csproj">
       <Project>{485A62AD-9BEA-447C-BAFA-202E58D68944}</Project>
       <Name>MDB.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDB.Repositories\MDB.Repositories.csproj">
+      <Project>{833B1B26-5449-42D8-A46C-B0873154C6E2}</Project>
+      <Name>MDB.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

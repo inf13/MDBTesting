@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{833B1B26-5449-42D8-A46C-B0873154C6E2}</ProjectGuid>
+    <ProjectGuid>{FD3F878F-9564-451A-9B19-2BE414FD6B80}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MDB.Repositories</RootNamespace>
-    <AssemblyName>MDB.Repositories</AssemblyName>
+    <RootNamespace>MDB.Mappers</RootNamespace>
+    <AssemblyName>MDB.Mappers</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,9 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,24 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\ConnectionConstants.cs" />
-    <Compile Include="Constants\StoreProcedureConstants.cs" />
-    <Compile Include="Heplers\ConfigurationHelper.cs" />
-    <Compile Include="Repositories\FilmRepository.cs" />
+    <Compile Include="Mappers\FilmMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Factory\Factory.csproj">
-      <Project>{626007CA-0562-4556-8D81-53FD3B3CABAA}</Project>
-      <Name>Factory</Name>
+    <ProjectReference Include="..\MDB.Entity\MDB.Entity.csproj">
+      <Project>{C03824EA-CF55-4018-84FD-8323C7AA1B80}</Project>
+      <Name>MDB.Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\MDB.Infrastructure\MDB.Infrastructure.csproj">
       <Project>{485A62AD-9BEA-447C-BAFA-202E58D68944}</Project>
       <Name>MDB.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MDB.Mappers\MDB.Mappers.csproj">
-      <Project>{FD3F878F-9564-451A-9B19-2BE414FD6B80}</Project>
-      <Name>MDB.Mappers</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

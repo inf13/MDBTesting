@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using MDB.Infrastructure.Models;
+using MDB.Infrastructure.Entities;
 
 namespace MDB.Infrastructure.Repositories
 {
     public interface IFilmRepository
     {
-        IReadOnlyCollection<IFilmModel> GetCollection();
+        IReadOnlyCollection<IFilm> GetCollection();
 
-        IFilmModel GetFilm(string title);
+        IFilm GetFilm(string title, string genre, int? year);
     }
 }

@@ -47,6 +47,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MDB.Infrastructure\MDB.Infrastructure.csproj">
+      <Project>{485A62AD-9BEA-447C-BAFA-202E58D68944}</Project>
+      <Name>MDB.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDB.Operations\MDB.Operations.csproj">
+      <Project>{4439DC7D-8F95-4343-B2E2-FC086DB07CD1}</Project>
+      <Name>MDB.Operations</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Management.Instrumentation;
+using MDB.Operations.Operation;
 
 namespace MDBConsole
 {
@@ -6,12 +8,16 @@ namespace MDBConsole
     {
         static void Main(string[] args)
         {
-           var line = Console.ReadLine();
-           //const string template = "{0}.{1} {2}";
-           //var some = Regex.Match(line, @"(.*)\.(.*)");
+
+            var operation = new FilmOperation();
+            operation.GetFilm("Schindler's List", null, null);
+
+
+            //var line = Console.ReadLine();
+            //const string template = "{0}.{1} {2}";
+            //var some = Regex.Match(line, @"(.*)\.(.*)");
 
             //Get.Film : [name=parameter],[name=parameter]
-
         }
 
 

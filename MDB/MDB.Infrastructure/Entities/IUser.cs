@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace MDB.Infrastructure.Models
+namespace MDB.Infrastructure.Entities
 {
-    public interface IUserModel
+    public interface IUser
     {
         Guid Id { get; set; }
 
