@@ -42,7 +42,8 @@
     <Compile Include="Entities\IActor.cs" />
     <Compile Include="Entities\IBaseEntity.cs" />
     <Compile Include="Entities\ICountry.cs" />
-    <Compile Include="Enums\Commands.cs" />
+    <Compile Include="Entities\IFilmActor.cs" />
+    <Compile Include="Entities\IFilmDirector.cs" />
     <Compile Include="Factories\IEntityFactory.cs" />
     <Compile Include="Entities\IDirector.cs" />
     <Compile Include="Entities\IFilm.cs" />
@@ -51,6 +52,8 @@
     <Compile Include="Mappers\IActorMapper.cs" />
     <Compile Include="Mappers\IBaseMapper.cs" />
     <Compile Include="Mappers\IDirectorMapper.cs" />
+    <Compile Include="Mappers\IFilmActorMapper.cs" />
+    <Compile Include="Mappers\IFilmDirectorMapper.cs" />
     <Compile Include="Mappers\IFilmMapper.cs" />
     <Compile Include="Operations\IEntityOperation.cs" />
     <Compile Include="Operations\IFilmOperation.cs" />

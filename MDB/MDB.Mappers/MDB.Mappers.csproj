@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="Mappers\ActorMapper.cs" />
     <Compile Include="Mappers\DirectorMapper.cs" />
+    <Compile Include="Mappers\FilmActorMapper.cs" />
+    <Compile Include="Mappers\FilmDirectorMapper.cs" />
     <Compile Include="Mappers\FilmMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

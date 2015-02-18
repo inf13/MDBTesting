@@ -66,8 +66,17 @@ namespace MDB.Repositories.Repositories
 
                     //Map data from Reader to Director Entity
                     directorMapper.Map(reader, director);
+                }
+                
+                reader.NextResult();
 
-                    film.Directors.Add(director);
+                //Get director to film relation
+
+                while (reader.Read())
+                {
+                    var filmDirector = (IFilmDirector)base.EntityFactory.Get(typeof(IFilmDirector));
+                    var filmDirectorMapper = (IFilmDirectorMapper)base.MapperFactory.Get(typeof(IFilmDirectorMapper));
+                    filmDirectorMapper.Map(reader, filmDirector);
                 }
 
                 reader.NextResult();
@@ -81,7 +90,17 @@ namespace MDB.Repositories.Repositories
 
                     //Map data from Reader to Actor Entity
                     actorMapper.Map(reader, actor);
-                    film.Actors.Add(actor);
+                }
+
+                reader.NextResult();
+
+                //Get actor to film collection
+                while (reader.Read())
+                {
+                    var filmActor = (IFilmActor) base.EntityFactory.Get(typeof (IActor));
+                    var filmActorMapper = (IFilmActorMapper) base.MapperFactory.Get(typeof (IFilmActorMapper));
+
+                    filmActorMapper.Map(reader, filmActor);
                 }
 
                 reader.Close();

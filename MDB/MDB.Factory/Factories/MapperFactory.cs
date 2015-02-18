@@ -12,7 +12,9 @@ namespace MDB.Factory.Factories
         {
             {typeof(IFilmMapper), new FilmMapper()},
             {typeof(IDirectorMapper), new DirectorMapper()},
-            {typeof(IActorMapper), new ActorMapper()}
+            {typeof(IActorMapper), new ActorMapper()},
+            {typeof(IFilmDirectorMapper), new FilmDirectorMapper()},
+            {typeof(IFilmActorMapper), new FilmActorMapper()}
         };
 
 
