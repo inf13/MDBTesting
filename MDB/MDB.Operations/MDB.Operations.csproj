@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Operation\ConsoleOperation.cs" />
     <Compile Include="Operation\FilmOperation.cs" />
     <Compile Include="Operation\ParseOperation.cs" />
     <Compile Include="Operation\UserOperation.cs" />

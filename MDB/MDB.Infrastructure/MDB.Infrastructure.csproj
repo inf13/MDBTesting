@@ -52,7 +52,6 @@
     <Compile Include="Mappers\IBaseMapper.cs" />
     <Compile Include="Mappers\IDirectorMapper.cs" />
     <Compile Include="Mappers\IFilmMapper.cs" />
-    <Compile Include="Operations\IConsoleOperation.cs" />
     <Compile Include="Operations\IEntityOperation.cs" />
     <Compile Include="Operations\IFilmOperation.cs" />
     <Compile Include="Operations\IParseOperation.cs" />
