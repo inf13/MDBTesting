@@ -42,15 +42,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\ConnectionConstants.cs" />
-    <Compile Include="Constants\StoreProcedureConstants.cs" />
+    <Compile Include="Constants\StoreProcedure\FilmConstants.cs" />
+    <Compile Include="Extensions\CommandExtension.cs" />
     <Compile Include="Heplers\ConfigurationHelper.cs" />
+    <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\FilmRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Factory\Factory.csproj">
-      <Project>{626007CA-0562-4556-8D81-53FD3B3CABAA}</Project>
-      <Name>Factory</Name>
+    <ProjectReference Include="..\MDB.Factory\MDB.Factory.csproj">
+      <Project>{EF814EDC-D1B4-4CCE-B4DC-07E2DC21A07E}</Project>
+      <Name>MDB.Factory</Name>
     </ProjectReference>
     <ProjectReference Include="..\MDB.Infrastructure\MDB.Infrastructure.csproj">
       <Project>{485A62AD-9BEA-447C-BAFA-202E58D68944}</Project>

@@ -11,7 +11,9 @@ namespace MDB.Entity.Entities
         public string Genre { get; set; }
         public int Year { get; set; }
         public float Rating { get; set; }
-        public IReadOnlyCollection<IDirector> Directors { get; set; }
-        public IReadOnlyCollection<IActor> Actors { get; set; }
+
+        public IList<IDirector> Directors { get; set; }
+
+        public IList<IActor> Actors { get; set;  }
     }
 }

@@ -1,9 +1,9 @@
-﻿using MDB.Infrastructure.Operations;
+﻿using System;
 
 namespace MDB.Infrastructure.Factories
 {
     public interface IEntityFactory
     {
-        IEntityOperation Get(string parameter);
+        object Get(Type entityType);
     }
 }

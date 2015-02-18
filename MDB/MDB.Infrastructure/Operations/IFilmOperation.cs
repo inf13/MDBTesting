@@ -7,6 +7,6 @@ namespace MDB.Infrastructure.Operations
     {
         IReadOnlyCollection<IFilm> GetCollection();
 
-        IFilm GetFilm(string name, string genre, int? year);
+        IList<IFilm> GetFilm(string name, string genre, int? year);
     }
 }

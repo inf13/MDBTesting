@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MDB.Infrastructure.Entities
 {
-    public interface IFilm
+    public interface IFilm : IBaseEntity
     {
         Guid Id { get; set; }
 
@@ -15,8 +15,8 @@ namespace MDB.Infrastructure.Entities
 
         float Rating { get; set; }
 
-        IReadOnlyCollection<IDirector> Directors { get; set; }
+        IList<IDirector> Directors { get; set; }
 
-        IReadOnlyCollection<IActor> Actors { get; set; }
+        IList<IActor> Actors { get; set; }
     }
 }

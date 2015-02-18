@@ -1,93 +1,94 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Runtime.Remoting.Messaging;
-using System.Transactions;
-using Factory.Factories;
 using MDB.Infrastructure.Entities;
 using MDB.Infrastructure.Mappers;
 using MDB.Infrastructure.Repositories;
-using MDB.Mappers.Mappers;
-using MDB.Repositories.Constants;
+using MDB.Repositories.Constants.StoreProcedure;
+using MDB.Repositories.Extensions;
 using MDB.Repositories.Heplers;
 
 namespace MDB.Repositories.Repositories
 {
-    public class FilmRepository : IFilmRepository
+    public class FilmRepository : BaseRepository, IFilmRepository
     {
         public IReadOnlyCollection<IFilm> GetCollection()
         {
             throw new System.NotImplementedException();
         }
 
-        public IFilm GetFilm(string title, string genre, int? year)
+        /// <summary>
+        /// Get Film Collection
+        /// </summary>
+        /// <param name="title">Film Title (Optional parameter)</param>
+        /// <param name="genre">Filme Genre (Optional parameter)</param>
+        /// <param name="year">Film Year (Optional parameter)</param>
+        /// <returns>Collection of Films</returns>
+        public IList<IFilm> GetFilm(string title, string genre, int? year)
         {
-            var list = new List<string>();
-            var mapperFactory = new MapperFactory();
-            using (var transactionScope = new TransactionScope())
+            var filmCollection = new List<IFilm>();
+
+            using (SqlConnection connection = new SqlConnection(ConfigurationHelper.ConnectionString))
             {
-                using (SqlConnection connection = new SqlConnection(ConfigurationHelper.ConnectionString))
+                var command = new SqlCommand(FilmConstants.GetFilms, connection)
                 {
-                    var command = new SqlCommand(StoreProcedureConstants.GetFilms, connection)
-                    {
-                        CommandType = CommandType.StoredProcedure
-                    };
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                //Using Command Extension to add parameters to SQLCommand by parameter's name and values
+                command.AddParameter(FilmConstants.FilmTitleParameter, title);
+                command.AddParameter(FilmConstants.FilmGenreParameter, genre);
+                command.AddParameter(FilmConstants.FilmYearParameter, year);
+
+                command.Connection.Open();
+
+                var reader = command.ExecuteReader();
+                var film = (IFilm)base.EntityFactory.Get(typeof(IFilm));
+
+                //Get film collection
+                while (reader.Read())
+                {
+                    //Create film object
                     
-                    command.Parameters.Add(new SqlParameter()
-                    {
-                        ParameterName = "@filmTitle",
-                        DbType = DbType.String,
-                        Direction = ParameterDirection.Input,
-                        Value = title
-                    });
+                    var filmMapper = (IFilmMapper) base.MapperFactory.Get(typeof (IFilmMapper));
 
-                    command.Parameters.Add(new SqlParameter()
-                    {
-                        ParameterName = "@filmGenre",
-                        DbType = DbType.String,
-                        Direction = ParameterDirection.Input,
-                        Value = genre
-                    });
-
-                    command.Parameters.Add(new SqlParameter()
-                    {
-                        ParameterName = "@filmYear",
-                        DbType = DbType.Int32,
-                        Direction = ParameterDirection.Input,
-                        Value = year
-                    });
-
-                    
-                    command.Connection.Open();
-
-                    var reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        var filmMapper = (IFilmMapper)mapperFactory.Get(typeof(IFilmMapper));
-                        var film = filmMapper.Map(reader);
-                    }
-
-                    reader.NextResult();
-
-                    while (reader.Read())
-                    {
-                        list.Add(reader["Name"].ToString());
-                    }
-
-                    reader.NextResult();
-
-                    while (reader.Read())
-                    {
-                        list.Add(reader["Name"].ToString());
-                    }
-
-                    reader.Close();
-
-
+                    // Map data from Reader to Film Entity
+                    filmMapper.Map(reader, film);
+                    filmCollection.Add(film);
                 }
-                transactionScope.Complete();
+                reader.NextResult();
+
+                // Get directors collection
+                while (reader.Read())
+                {
+                    var director = (IDirector) base.EntityFactory.Get(typeof (IDirector));
+                    var directorMapper = (IDirectorMapper) base.MapperFactory.Get(typeof (IDirectorMapper));
+
+                    //Map data from Reader to Director Entity
+                    directorMapper.Map(reader, director);
+
+                    film.Directors.Add(director);
+                }
+
+                reader.NextResult();
+
+                //Get actor collection
+                while (reader.Read())
+                {
+                    //Get actor object
+                    var actor = (IActor) base.EntityFactory.Get(typeof (IActor));
+                    var actorMapper = (IActorMapper) base.MapperFactory.Get(typeof (IActorMapper));
+
+                    //Map data from Reader to Actor Entity
+                    actorMapper.Map(reader, actor);
+                    film.Actors.Add(actor);
+                }
+
+                reader.Close();
+
+                //Add film
             }
-            return null;
+            return filmCollection;
         }
     }
 }

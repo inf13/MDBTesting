@@ -3,10 +3,10 @@ using MDB.Infrastructure.Entities;
 
 namespace MDB.Infrastructure.Repositories
 {
-    public interface IFilmRepository
+    public interface IFilmRepository : IBaseRepository
     {
         IReadOnlyCollection<IFilm> GetCollection();
 
-        IFilm GetFilm(string title, string genre, int? year);
+        IList<IFilm> GetFilm(string title, string genre, int? year);
     }
 }

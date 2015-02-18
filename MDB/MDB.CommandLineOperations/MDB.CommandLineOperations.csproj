@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C03824EA-CF55-4018-84FD-8323C7AA1B80}</ProjectGuid>
+    <ProjectGuid>{5DAA4B5E-3CE5-4C4D-B756-5A938405E8ED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MDB.Entity</RootNamespace>
-    <AssemblyName>MDB.Entity</AssemblyName>
+    <RootNamespace>MDB.CommandLineOperations</RootNamespace>
+    <AssemblyName>MDB.CommandLineOperations</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,16 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Actor.cs" />
-    <Compile Include="Entities\Director.cs" />
-    <Compile Include="Entities\Film.cs" />
+    <Compile Include="Operations\FilmCommandOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MDB.Infrastructure\MDB.Infrastructure.csproj">
-      <Project>{485A62AD-9BEA-447C-BAFA-202E58D68944}</Project>
-      <Name>MDB.Infrastructure</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,7 +2,7 @@
 
 namespace MDB.Infrastructure.Entities
 {
-    public interface IUser
+    public interface IUser : IBaseEntity
     {
         Guid Id { get; set; }
 

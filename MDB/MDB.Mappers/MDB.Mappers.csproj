@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappers\ActorMapper.cs" />
+    <Compile Include="Mappers\DirectorMapper.cs" />
     <Compile Include="Mappers\FilmMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

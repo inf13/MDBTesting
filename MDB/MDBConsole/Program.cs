@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Management.Instrumentation;
-using MDB.Operations.Operation;
+using System.Text.RegularExpressions;
+using MDBConsole.CommandLineManagement;
 
 namespace MDBConsole
 {
@@ -8,23 +8,30 @@ namespace MDBConsole
     {
         static void Main(string[] args)
         {
+            //var operation = new FilmOperation();
+            //var list = operation.GetFilm(null, "Drama", null)
+            
+            Console.WriteLine("Get.GetFilm : null,Drama,null");
 
-            var operation = new FilmOperation();
-            operation.GetFilm("Schindler's List", null, null);
+            
+            var line = Console.ReadLine();
+            var consoleHelper = new CommandLineParser();
 
-
-            //var line = Console.ReadLine();
-            //const string template = "{0}.{1} {2}";
-            //var some = Regex.Match(line, @"(.*)\.(.*)");
+            consoleHelper.Parse(line);
 
             //Get.Film : [name=parameter],[name=parameter]
+            // Get.Films : [value=list],[genre=dramma]
         }
 
 
-        private void Do()
+        private static void Do()
         {
-              
 
+            var line = Console.ReadLine();
+
+            string comandTemplate = @"(\w+):";
+
+            Match match = Regex.Match(line, comandTemplate, RegexOptions.IgnoreCase);
             
         }
     }
