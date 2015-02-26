@@ -3,8 +3,8 @@ using MDB.Infrastructure.Entities;
 
 namespace MDB.Infrastructure.Mappers
 {
-    public interface IDirectorMapper : IBaseMapper
+    public interface IDirectorMapper
     {
-        void Map(IDataReader reader, IDirector director);
+        IDirector Map(IDataReader reader);
     }
 }

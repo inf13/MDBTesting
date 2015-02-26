@@ -7,11 +7,27 @@ using MDB.Infrastructure.Repositories;
 using MDB.Repositories.Constants.StoreProcedure;
 using MDB.Repositories.Extensions;
 using MDB.Repositories.Heplers;
+using Microsoft.Practices.Unity;
 
 namespace MDB.Repositories.Repositories
 {
-    public class FilmRepository : BaseRepository, IFilmRepository
+    public class FilmRepository : IFilmRepository
     {
+        [Dependency]
+        protected IFilmMapper FilmMapper { get; set; }
+
+        [Dependency]
+        protected IDirectorMapper DirectorMapper { get; set; }
+
+        [Dependency]
+        protected IFilmDirectorMapper FilmDirectorMapper { get; set; }
+
+        [Dependency]
+        protected IActorMapper ActorMapper { get; set; }
+
+        [Dependency]
+        protected IFilmActorMapper FilmActorMapper { get; set; }
+
         public IReadOnlyCollection<IFilm> GetCollection()
         {
             throw new System.NotImplementedException();
@@ -43,29 +59,25 @@ namespace MDB.Repositories.Repositories
                 command.Connection.Open();
 
                 var reader = command.ExecuteReader();
-                var film = (IFilm)base.EntityFactory.Get(typeof(IFilm));
+                
 
                 //Get film collection
                 while (reader.Read())
                 {
-                    //Create film object
-                    
-                    var filmMapper = (IFilmMapper) base.MapperFactory.Get(typeof (IFilmMapper));
-
                     // Map data from Reader to Film Entity
-                    filmMapper.Map(reader, film);
+                    var film = FilmMapper.Map(reader);
                     filmCollection.Add(film);
                 }
                 reader.NextResult();
 
+                var directorCollection = new List<IDirector>();
+
                 // Get directors collection
                 while (reader.Read())
                 {
-                    var director = (IDirector) base.EntityFactory.Get(typeof (IDirector));
-                    var directorMapper = (IDirectorMapper) base.MapperFactory.Get(typeof (IDirectorMapper));
-
                     //Map data from Reader to Director Entity
-                    directorMapper.Map(reader, director);
+                    var director = DirectorMapper.Map(reader);
+                    directorCollection.Add(director);
                 }
                 
                 reader.NextResult();
@@ -74,22 +86,22 @@ namespace MDB.Repositories.Repositories
 
                 while (reader.Read())
                 {
-                    var filmDirector = (IFilmDirector)base.EntityFactory.Get(typeof(IFilmDirector));
-                    var filmDirectorMapper = (IFilmDirectorMapper)base.MapperFactory.Get(typeof(IFilmDirectorMapper));
-                    filmDirectorMapper.Map(reader, filmDirector);
+                    var filmDirector = FilmDirectorMapper.Map(reader);
+                    FilmDirectorMapper.MapDirectorToFilm(filmDirector, filmCollection, directorCollection);
                 }
 
                 reader.NextResult();
+
+                var actorCollection = new List<IActor>();
 
                 //Get actor collection
                 while (reader.Read())
                 {
                     //Get actor object
-                    var actor = (IActor) base.EntityFactory.Get(typeof (IActor));
-                    var actorMapper = (IActorMapper) base.MapperFactory.Get(typeof (IActorMapper));
 
                     //Map data from Reader to Actor Entity
-                    actorMapper.Map(reader, actor);
+                    var actor = ActorMapper.Map(reader);
+                    actorCollection.Add(actor);
                 }
 
                 reader.NextResult();
@@ -97,16 +109,43 @@ namespace MDB.Repositories.Repositories
                 //Get actor to film collection
                 while (reader.Read())
                 {
-                    var filmActor = (IFilmActor) base.EntityFactory.Get(typeof (IActor));
-                    var filmActorMapper = (IFilmActorMapper) base.MapperFactory.Get(typeof (IFilmActorMapper));
-
-                    filmActorMapper.Map(reader, filmActor);
+                    var filmActor = FilmActorMapper.Map(reader);
+                    FilmActorMapper.MapActorToFilm(filmActor, filmCollection, actorCollection);
                 }
 
                 reader.Close();
 
                 //Add film
             }
+            return filmCollection;
+        }
+
+
+        public IList<IFilm> GetFilmsRatedByUser(string userNickName)
+        {
+            var filmCollection = new List<IFilm>();
+
+            using (var connection = new SqlConnection(ConfigurationHelper.ConnectionString))
+            {
+                var command = new SqlCommand(FilmConstants.GetFilmsRatedByUser, connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                command.AddParameter(FilmConstants.UserNickNameParameter, userNickName);
+
+                command.Connection.Open();
+
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var film = FilmMapper.Map(reader);
+                    filmCollection.Add(film);
+                }
+                reader.Close();
+            }
+            
             return filmCollection;
         }
     }

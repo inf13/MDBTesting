@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using MDB.Entity.Entities;
 using MDB.Infrastructure.Entities;
 using MDB.Infrastructure.Mappers;
 
@@ -7,10 +10,25 @@ namespace MDB.Mappers.Mappers
 {
     public class FilmActorMapper : IFilmActorMapper
     {
-        public void Map(IDataReader reader, IFilmActor filmActor)
+        public IFilmActor Map(IDataReader reader)
         {
-            filmActor.FilmId = Guid.Parse(reader["FilmId"].ToString());
-            filmActor.ActorId = Guid.Parse(reader["ActorId"].ToString());
+            var filmActor = new FilmActor
+            {
+                FilmId = Guid.Parse(reader["FilmId"].ToString()),
+                ActorId = Guid.Parse(reader["ActorId"].ToString())
+            };
+            return filmActor;
+        }
+
+        public void MapActorToFilm(IFilmActor filmActor, IList<IFilm> filmCollection, IList<IActor> actorCollection)
+        {
+            var concreteFilm = filmCollection.FirstOrDefault(x => x.Id == filmActor.FilmId);
+            var concreteActor = actorCollection.FirstOrDefault(x => x.Id == filmActor.ActorId);
+
+            if (concreteFilm != null && concreteActor != null)
+            {
+                concreteFilm.Actors.Add(concreteActor);
+            }
         }
     }
 }

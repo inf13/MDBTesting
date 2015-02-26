@@ -3,8 +3,8 @@ using MDB.Infrastructure.Entities;
 
 namespace MDB.Infrastructure.Mappers
 {
-    public interface IFilmMapper : IBaseMapper
+    public interface IFilmMapper
     {
-        void Map(IDataReader reader, IFilm film);
+        IFilm Map(IDataReader reader);
     }
 }

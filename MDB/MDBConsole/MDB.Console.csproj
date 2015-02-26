@@ -32,7 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,15 +58,35 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="unity.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MDB.CompositionRoot\MDB.CompositionRoot.csproj">
+      <Project>{80FCC7EC-9869-40BC-A3C7-6D2B90335799}</Project>
+      <Name>MDB.CompositionRoot</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDB.Entity\MDB.Entity.csproj">
+      <Project>{c03824ea-cf55-4018-84fd-8323c7aa1b80}</Project>
+      <Name>MDB.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MDB.Infrastructure\MDB.Infrastructure.csproj">
       <Project>{485A62AD-9BEA-447C-BAFA-202E58D68944}</Project>
       <Name>MDB.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MDB.Mappers\MDB.Mappers.csproj">
+      <Project>{fd3f878f-9564-451a-9b19-2be414fd6b80}</Project>
+      <Name>MDB.Mappers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MDB.Operations\MDB.Operations.csproj">
       <Project>{4439DC7D-8F95-4343-B2E2-FC086DB07CD1}</Project>
       <Name>MDB.Operations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDB.Repositories\MDB.Repositories.csproj">
+      <Project>{833b1b26-5449-42d8-a46c-b0873154c6e2}</Project>
+      <Name>MDB.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

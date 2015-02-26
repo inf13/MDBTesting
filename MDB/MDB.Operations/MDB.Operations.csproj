@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,15 +47,10 @@
     <Compile Include="Operation\UserOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\MDB.Infrastructure\MDB.Infrastructure.csproj">
       <Project>{485A62AD-9BEA-447C-BAFA-202E58D68944}</Project>
       <Name>MDB.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MDB.Repositories\MDB.Repositories.csproj">
-      <Project>{833B1B26-5449-42D8-A46C-B0873154C6E2}</Project>
-      <Name>MDB.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

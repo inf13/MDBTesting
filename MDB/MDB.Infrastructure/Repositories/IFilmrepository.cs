@@ -8,5 +8,7 @@ namespace MDB.Infrastructure.Repositories
         IReadOnlyCollection<IFilm> GetCollection();
 
         IList<IFilm> GetFilm(string title, string genre, int? year);
+
+        IList<IFilm> GetFilmsRatedByUser(string userNickName);
     }
 }

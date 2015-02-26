@@ -7,5 +7,8 @@
         public const string FilmGenreParameter = "@filmGenre";
         public const string FilmYearParameter = "@filmYear";
 
+        public const string GetFilmsRatedByUser = "sp_GetFilmsRatedByUser";
+        public const string UserNickNameParameter = "@userNickName";
+
     }
 }

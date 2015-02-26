@@ -20,7 +20,7 @@ namespace MDBConsole.CommandLineManagement
         /// </summary>
         private readonly IDictionary<string, object> _operations = new Dictionary<string, object>()
         {
-            {"Film", new FilmOperation()}
+        //    {"Film", new FilmOperation()}
         };
 
         /// <summary>

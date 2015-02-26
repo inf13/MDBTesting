@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -45,14 +48,13 @@
     <Compile Include="Constants\StoreProcedure\FilmConstants.cs" />
     <Compile Include="Extensions\CommandExtension.cs" />
     <Compile Include="Heplers\ConfigurationHelper.cs" />
-    <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\FilmRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MDB.Factory\MDB.Factory.csproj">
-      <Project>{EF814EDC-D1B4-4CCE-B4DC-07E2DC21A07E}</Project>
-      <Name>MDB.Factory</Name>
+    <ProjectReference Include="..\MDB.Entity\MDB.Entity.csproj">
+      <Project>{C03824EA-CF55-4018-84FD-8323C7AA1B80}</Project>
+      <Name>MDB.Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\MDB.Infrastructure\MDB.Infrastructure.csproj">
       <Project>{485A62AD-9BEA-447C-BAFA-202E58D68944}</Project>

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using MDB.Operations.Operation;
-using MDBConsole.CommandLineManagement;
+using MDB.CompositionRoot;
+using MDB.Infrastructure.Operations;
+using Microsoft.Practices.Unity;
 
 namespace MDBConsole
 {
@@ -9,11 +10,14 @@ namespace MDBConsole
     {
         static void Main(string[] args)
         {
-            var operation = new FilmOperation();
-            var list = operation.GetFilm(null, "Drama", null);
+            var unityAutoregistration = new UnityAutoregistration();
+            var container =  unityAutoregistration.Registrate();
+
+            var filmOperation = container.Resolve<IFilmOperation>();
+
+            var list = filmOperation.GetFilm(null, "Drama", null);
 
             //Console.WriteLine("Get.GetFilm : null,Drama,null");
-
 
             //var line = Console.ReadLine();
             //var consoleHelper = new CommandLineParser();
@@ -27,7 +31,6 @@ namespace MDBConsole
 
         private static void Do()
         {
-
             var line = Console.ReadLine();
 
             string comandTemplate = @"(\w+):";

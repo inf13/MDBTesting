@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using MDB.Entity.Entities;
 using MDB.Infrastructure.Entities;
 using MDB.Infrastructure.Mappers;
 
@@ -7,11 +8,15 @@ namespace MDB.Mappers.Mappers
 {
     public class ActorMapper : IActorMapper
     {
-        public void Map(IDataReader reader, IActor actor)
+        public IActor Map(IDataReader reader)
         {
-            actor.Id = Guid.Parse(reader["Id"].ToString());
-            actor.Name = reader["Name"].ToString();
-            actor.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
+            var actor = new Actor
+            {
+                Id = Guid.Parse(reader["Id"].ToString()),
+                Name = reader["Name"].ToString(),
+                DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString())
+            };
+            return actor;
         }
     }
 }

@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MDB.Infrastructure.Entities;
 using MDB.Infrastructure.Operations;
-using MDB.Repositories.Repositories;
+using MDB.Infrastructure.Repositories;
+using Microsoft.Practices.Unity;
 
 namespace MDB.Operations.Operation
 {
     public class FilmOperation : IFilmOperation
     {
+        [Dependency]
+        protected IFilmRepository FilmRepository { get; set; }
+
         public IReadOnlyCollection<IFilm> GetCollection()
         {
             throw new System.NotImplementedException();
@@ -15,8 +18,7 @@ namespace MDB.Operations.Operation
 
         public IList<IFilm> GetFilm(string name, string genre, int? year)
         {
-            var repository = new FilmRepository();
-            var result = repository.GetFilm(name, genre, year);
+            var result = FilmRepository.GetFilm(name, genre, year);
             
             return result;
         }
