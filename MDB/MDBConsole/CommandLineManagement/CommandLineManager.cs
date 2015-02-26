@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MDB.Operations.Operation;
+using MDB.Infrastructure.Operations;
 using MDBConsole.CommandLineManagement.Constants;
+using Microsoft.Practices.Unity;
 
-namespace MDBConsole.CommandLineManagement
+namespace MDB.Console.CommandLineManagement
 {
     // Parse input string and invoke actual method.
     //---------------------------------------------------
@@ -13,21 +14,14 @@ namespace MDBConsole.CommandLineManagement
     // OperationName - it's a name of Operation, which must be used for handle following command
     // MethodName - it's a name of Method, which must be invoked
     // {: param1, param2,...,paramN} - optional section. Different method's have undefined parameters count
-    public class CommandLineParser
+    public class CommandLineManager
     {
-        /// <summary>
-        /// Dictionary of compliance. Operation Code to Actual Operation Object
-        /// </summary>
-        private readonly IDictionary<string, object> _operations = new Dictionary<string, object>()
-        {
-        //    {"Film", new FilmOperation()}
-        };
-
         /// <summary>
         /// Parse input value and invoke actual method 
         /// </summary>
         /// <param name="inputValue">User command</param>
-        public void Parse(string inputValue)
+        /// <param name="container">Unity container</param>
+        public void Parse(string inputValue, UnityContainer container)
         {
             var commandLine = inputValue.Split(':');
 
@@ -35,17 +29,27 @@ namespace MDBConsole.CommandLineManagement
             string operationCode;
 
             ParseSignature(commandLine, out methodName, out operationCode);
-            
-            if (_operations.ContainsKey(operationCode))
+
+            object resolvedObject;
+
+
+            switch (operationCode)
             {
-                var operation = _operations[operationCode];
-
-                var method = GetMethod(operation, methodName);
-                var parameters = GetParametersForInvoke(method, commandLine);
-
-                method.Invoke(operation, parameters);
+                case "Film":
+                {
+                    resolvedObject = container.Resolve<IFilmOperation>();
+                }
+                    break;
+                default:
+                    return;
             }
+            var method = GetMethod(resolvedObject, methodName);
+
+            var parameters = GetParametersForInvoke(method, commandLine);
+
+            method.Invoke(resolvedObject, parameters);
         }
+        
 
         /// <summary>
         /// Get method, which handle user command
@@ -93,9 +97,11 @@ namespace MDBConsole.CommandLineManagement
                         //then - set value of this parameter at null
                         objects[i] = null;
                     }
-
-                    //then - add this parameter to actual object list
-                    objects[i] = userParameter;
+                    else
+                    {
+                        //then - add this parameter to actual object list
+                        objects[i] = userParameter;
+                    }
                 }
                 else
                 {

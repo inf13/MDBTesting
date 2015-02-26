@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using MDB.CompositionRoot;
+using MDB.Console.CommandLineManagement;
 using MDB.Infrastructure.Operations;
 using Microsoft.Practices.Unity;
 
@@ -13,16 +14,16 @@ namespace MDBConsole
             var unityAutoregistration = new UnityAutoregistration();
             var container =  unityAutoregistration.Registrate();
 
-            var filmOperation = container.Resolve<IFilmOperation>();
+            //var filmOperation = container.Resolve<IFilmOperation>();
 
-            var list = filmOperation.GetFilm(null, "Drama", null);
+            //var list = filmOperation.GetFilm(null, "Drama", null);
 
             //Console.WriteLine("Get.GetFilm : null,Drama,null");
 
-            //var line = Console.ReadLine();
-            //var consoleHelper = new CommandLineParser();
+            var line = Console.ReadLine();
+            var consoleHelper = new CommandLineManager();
 
-            //consoleHelper.Parse(line);
+            consoleHelper.Parse(line, container);
 
             //Get.Film : [name=parameter],[name=parameter]
             // Get.Films : [value=list],[genre=dramma]
