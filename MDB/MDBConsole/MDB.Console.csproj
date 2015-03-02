@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandLineManagement\CommandLineManager.cs" />
+    <Compile Include="CommandLineManagement\CommandLineParser.cs" />
     <Compile Include="CommandLineManagement\Constants\CommandLineParsingConstants.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

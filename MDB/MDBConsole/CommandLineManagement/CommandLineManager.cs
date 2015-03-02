@@ -9,7 +9,7 @@ namespace MDB.Console.CommandLineManagement
     // OperationName - it's a name of Operation, which must be used for handle following command
     // MethodName - it's a name of Method, which must be invoked
     // {: param1, param2,...,paramN} - optional section. Different method's have undefined parameters count
-    public class CommandLineManager
+    public class CommandLineManager 
     {
         private readonly CommandLineParser _commandLineParser = new CommandLineParser();
         
