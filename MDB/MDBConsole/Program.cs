@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using MDB.CompositionRoot;
 using MDB.Console.CommandLineManagement;
 using MDB.Infrastructure.Operations;
+using MDB.Unity;
 using Microsoft.Practices.Unity;
 
 namespace MDBConsole
@@ -11,8 +11,8 @@ namespace MDBConsole
     {
         static void Main(string[] args)
         {
-            var unityAutoregistration = new UnityAutoregistration();
-            var container =  unityAutoregistration.Registrate();
+            //var unityAutoregistration = new Bootstrapper();
+            //var container =  unityAutoregistration.Configure(new UnityContainer());
 
             //var filmOperation = container.Resolve<IFilmOperation>();
 
@@ -20,10 +20,10 @@ namespace MDBConsole
 
             //Console.WriteLine("Get.GetFilm : null,Drama,null");
 
-            var line = Console.ReadLine();
-            var consoleHelper = new CommandLineManager();
+            //var line = Console.ReadLine();
+            //var consoleHelper = new CommandLineManager();
 
-            consoleHelper.Parse(line, container);
+            //consoleHelper.Parse(line, container);
 
             //Get.Film : [name=parameter],[name=parameter]
             // Get.Films : [value=list],[genre=dramma]

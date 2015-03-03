@@ -22,5 +22,10 @@ namespace MDB.Operations.Operation
             
             return result;
         }
+
+        public void CreateFilm(string title, string genre, int year)
+        {
+            //FilmRepository.CreateFilm(title, genre, year);
+        }
     }
 }

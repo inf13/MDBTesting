@@ -80,10 +80,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MDB.CompositionRoot\MDB.CompositionRoot.csproj">
-      <Project>{80FCC7EC-9869-40BC-A3C7-6D2B90335799}</Project>
-      <Name>MDB.CompositionRoot</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MDB.Entity\MDB.Entity.csproj">
       <Project>{c03824ea-cf55-4018-84fd-8323c7aa1b80}</Project>
       <Name>MDB.Entity</Name>
@@ -103,6 +99,10 @@
     <ProjectReference Include="..\MDB.Repositories\MDB.Repositories.csproj">
       <Project>{833b1b26-5449-42d8-a46c-b0873154c6e2}</Project>
       <Name>MDB.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDB.Unity\MDB.Unity.csproj">
+      <Project>{4D3BEB8E-60D9-4593-B98C-F57CE53FB60F}</Project>
+      <Name>MDB.Unity</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

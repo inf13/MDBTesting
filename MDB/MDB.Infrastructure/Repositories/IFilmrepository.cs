@@ -10,5 +10,7 @@ namespace MDB.Infrastructure.Repositories
         IList<IFilm> GetFilm(string title, string genre, int? year);
 
         IList<IFilm> GetFilmsRatedByUser(string userNickName);
+
+        void CreateFilm(string title, string genre, int year);
     }
 }

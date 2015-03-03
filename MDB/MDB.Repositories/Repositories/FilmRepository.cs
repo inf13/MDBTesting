@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using MDB.Infrastructure.Entities;
@@ -147,6 +148,24 @@ namespace MDB.Repositories.Repositories
             }
             
             return filmCollection;
+        }
+
+        public void CreateFilm(string title, string genre, int year)
+        {
+            using (var connection = new SqlConnection(ConfigurationHelper.ConnectionString))
+            {
+                var command = new SqlCommand(FilmConstants.AddFilm, connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                command.AddParameter(FilmConstants.FilmIdParameter, Guid.NewGuid());
+                command.AddParameter(FilmConstants.FilmTitleParameter, title);
+                command.AddParameter(FilmConstants.FilmGenreParameter, genre);
+                command.AddParameter(FilmConstants.FilmYearParameter, year);
+
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
         }
     }
 }
